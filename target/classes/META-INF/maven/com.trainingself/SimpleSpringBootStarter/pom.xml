@@ -55,6 +55,15 @@
 			<scope>runtime</scope>
 		</dependency>
 
+		<!-- mybatisを利用するための設定 -->
+		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+		<dependency>
+			<groupId>org.mybatis</groupId>
+			<artifactId>mybatis</artifactId>
+			<version>3.5.6</version>
+		</dependency>
+
+
 		<!-- ホットデプロイ(ソースを保存したらサーバーに即時反映される)設定 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
