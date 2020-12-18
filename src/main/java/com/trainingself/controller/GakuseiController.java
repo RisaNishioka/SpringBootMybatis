@@ -36,9 +36,10 @@ public class GakuseiController {
 	public String gakuseiTop(Model model) {
 
 
+		//Daoの動きを確認するためのサンプルメソッド
 		try {
 
-			gakuseiSrv.getAllReserveData();
+			gakuseiSrv.executeDaoMethodAll();
 
 		} catch (IOException e) {
 			e.printStackTrace();

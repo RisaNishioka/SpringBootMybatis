@@ -1,7 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="reserveMapper">
-<select id="selectAll" resultType="hashmap">
-  SELECT * FROM RESERVE_MEETING
-</select>
+
+	<select id="selectAll" resultType="hashmap">
+		SELECT * FROM RESERVE_MEETING
+	</select>
+
+	<select id="selectAllWithDto"
+		resultType="com.trainingself.domain.model.Reserve">
+		SELECT
+		REQUEST_DATE1 as "requestDate1",
+		REQUEST_DATE2 as "requestDate2",
+		RECEPTION_NO as "receptionNo",
+		NAME as "name",
+		SCHOOL as "school",
+		DEV as "dev",
+		MACHING_POINT as "machingPoint",
+		CREATE_DATE as "createDate",
+		UPDATE_DATE as "updateDate"
+		FROM RESERVE_MEETING
+	</select>
+
+
+
+	<select id="selectbyPK"
+		resultType="com.trainingself.domain.model.Reserve">
+		SELECT
+		REQUEST_DATE1 as "requestDate1",
+		REQUEST_DATE2 as "requestDate2",
+		RECEPTION_NO as "receptionNo",
+		NAME as "name",
+		SCHOOL as "school",
+		DEV as "dev",
+		MACHING_POINT as "machingPoint",
+		CREATE_DATE as "createDate",
+		UPDATE_DATE as "updateDate"
+		FROM RESERVE_MEETING
+		WHERE
+		RECEPTION_NO=#{receptionNo}
+	</select>
+
+
+	<select id="selectCondition1" parameterType="hashmap"
+		resultType="com.trainingself.domain.model.Reserve">
+		SELECT
+		REQUEST_DATE1 as "requestDate1",
+		REQUEST_DATE2 as
+		"requestDate2",
+		RECEPTION_NO as "receptionNo",
+		NAME as "name",
+		SCHOOL as "school",
+		DEV as "dev",
+		MACHING_POINT as "machingPoint",
+		CREATE_DATE as "createDate",
+		UPDATE_DATE as "updateDate"
+		FROM RESERVE_MEETING
+		WHERE
+		SCHOOL=#{school} AND
+		NAME = #{name}
+	</select>
+
+
+	<select id="selectCondition2"
+		parameterType="com.trainingself.domain.model.Reserve"
+		resultType="com.trainingself.domain.model.Reserve">
+		SELECT
+		REQUEST_DATE1 as "requestDate1",
+		REQUEST_DATE2 as "requestDate2",
+		RECEPTION_NO as "receptionNo",
+		NAME as "name",
+		SCHOOL as "school",
+		DEV as "dev",
+		MACHING_POINT as "machingPoint",
+		CREATE_DATE as "createDate",
+		UPDATE_DATE as "updateDate"
+		FROM RESERVE_MEETING
+		WHERE
+		SCHOOL=#{school} AND
+		NAME = #{name}
+	</select>
+
+	<select id="selectCondition3"
+		parameterType="com.trainingself.domain.model.Reserve"
+		resultType="com.trainingself.domain.model.Reserve">
+		SELECT
+		REQUEST_DATE1 as "requestDate1",
+		REQUEST_DATE2 as "requestDate2",
+		RECEPTION_NO as "receptionNo",
+		NAME as "name",
+		SCHOOL as "school",
+		DEV as "dev",
+		MACHING_POINT as "machingPoint",
+		CREATE_DATE as "createDate",
+		UPDATE_DATE as "updateDate"
+		FROM RESERVE_MEETING
+		WHERE
+		<if test='receptionNo != null '>
+			RECEPTION_NO=#{receptionNo}
+		</if>
+		<if test='receptionNo == null '>
+			NAME = #{name}
+		</if>
+	</select>
+
+
+	<insert id="insert"
+		parameterType="com.trainingself.domain.model.Reserve">
+		INSERT INTO RESERVE_MEETING(
+			REQUEST_DATE1,
+			REQUEST_DATE2,
+			RECEPTION_NO,
+			NAME ,
+			SCHOOL,
+			DEV ,
+			MACHING_POINT,
+			CREATE_DATE,
+			UPDATE_DATE
+		)
+		VALUES(#{requestDate1},#{requestDate2},null,#{name},#{school},#{dev},#{machingPoint},#{createDate},#{updateDate})
+	</insert>
+
+	<update id="update"
+		parameterType="com.trainingself.domain.model.Reserve">
+		UPDATE RESERVE_MEETING
+		SET
+			REQUEST_DATE1 = #{requestDate1},
+			REQUEST_DATE2 = #{requestDate2},
+			SCHOOL = #{school},
+			UPDATE_DATE=#{updateDate}
+
+		WHERE RECEPTION_NO=#{receptionNo}
+	</update>
+
+
+
 </mapper>
+
