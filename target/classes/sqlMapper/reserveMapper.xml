@@ -7,6 +7,7 @@
 		SELECT * FROM RESERVE_MEETING
 	</select>
 
+<!--
 	<select id="selectAllWithDto"
 		resultType="com.trainingself.domain.model.Reserve">
 		SELECT
@@ -133,7 +134,7 @@
 		WHERE RECEPTION_NO=#{receptionNo}
 	</update>
 
-
+-->
 
 </mapper>
 
