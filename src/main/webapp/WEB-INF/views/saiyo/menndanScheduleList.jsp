@@ -54,10 +54,10 @@
 		</tr>
 	</table>
 
-	<c:if test="${not empty lists}">
+<!-- 	<c:if test="${not empty lists}"> -->
 
 		<ul>
-			<c:forEach var="inquiryFromValue" items="${inquiryForm}">
+			<c:forEach var="inquiryFromValue" items="${inquiryForm.inquiryList}">
 				<li>${inquiryFromValue.get("RECEPTION_NO")}</li>
 				<li>${inquiryFromValue.get("NAME")}</li>
 				<li>${inquiryFromValue.get("SCHOOL")}</li>
@@ -65,17 +65,7 @@
 			</c:forEach>
 		</ul>
 
-	</c:if>
+<!-- 	</c:if> -->
 
-	<script>
-		function listGet() {
-			var inqArray = inquiryForm.inquiryList;
-			var inqDisp = [];
-			for (var i = 0; i < inqArray.length; i++) {
-				inqDisp.push('<li>' + inqArray[i].NAME + '色は、在庫があります。</li>');
-			}
-			document.getElementById('stock').innerHTML = inqDisp.join('');
-		}
-	</script>
 </body>
 </html>
