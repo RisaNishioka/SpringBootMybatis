@@ -4,7 +4,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -57,25 +56,27 @@ public class SaiyouController {
 		form.setEndDate(dfDate.format(cal.getTime()));
 		form.setEndTime(dfTime.format(cal.getTime()));
 
-		model.addAttribute("inquiryForm", form);
 
 		// エントリー情報・日程をDBから取得
 		Reserve reserveDto = new Reserve();
 
 		List<Map<String, Object>> ls = new ArrayList<Map<String, Object>>();
 		ls = rs.selectAllMybatis();
+		form.setInquiryList(ls);
 
 		System.out.println(rs.selectAllMybatis());
 
 		for(Map<String, Object> map :ls) {
-			reserveDto.setName((String)map.get("name"));
-			reserveDto.setRequestDate1((Date)map.get("requestDate1"));
-			reserveDto.setRequestDate2((Date)map.get("requestDate2"));
+//			reserveDto.setName((String)map.get("NAME"));
+//			reserveDto.setRequestDate1((Date)map.get("REQUEST_DATE1"));
+//			reserveDto.setRequestDate2((Date)map.get("REQUEST_DATE2"));
 //			reserveDto.setDev((boolean)map.get("dev"));
-			reserveDto.setSchool((String)map.get("school"));
+			reserveDto.setSchool((String)map.get("SCHOOL"));
 		}
 
 		System.out.println(reserveDto.getSchool());
+
+		model.addAttribute("inquiryForm", form);
 
 		return "saiyo/menndanScheduleList";
 	}
