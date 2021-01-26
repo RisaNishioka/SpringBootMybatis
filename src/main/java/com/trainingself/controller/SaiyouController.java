@@ -10,6 +10,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -19,7 +20,7 @@ import com.trainingself.form.InquiryForm;
 import com.trainingself.service.ReserveService;
 
 @Controller
-@SessionAttributes(value = { "inquiryForm", "mendanForm"})
+@SessionAttributes(value = { "inquiryForm", "mendanForm" })
 public class SaiyouController {
 
 	@Autowired
@@ -48,14 +49,16 @@ public class SaiyouController {
 		DateFormat dfDate = new SimpleDateFormat("yyyy-MM-dd");
 		DateFormat dfTime = new SimpleDateFormat("HH:MM");
 
-		// StartDate・StartTime
-		form.setStartDate(dfDate.format(cal.getTime()));
-		form.setStartTime(dfTime.format(cal.getTime()));
+		//formに値が入っていなかったら初期値を入れる
+		if (StringUtils.isEmpty(form.getStartDate()) && StringUtils.isEmpty(form.getEndDate())) {
+			// StartDate・StartTime
+			form.setStartDate(dfDate.format(cal.getTime()));
+			form.setStartTime(dfTime.format(cal.getTime()));
 
-		// EndDate・EndTime
-		form.setEndDate(dfDate.format(cal.getTime()));
-		form.setEndTime(dfTime.format(cal.getTime()));
-
+			// EndDate・EndTime
+			form.setEndDate(dfDate.format(cal.getTime()));
+			form.setEndTime(dfTime.format(cal.getTime()));
+		}
 
 		// エントリー情報・日程をDBから取得
 		Reserve reserveDto = new Reserve();
@@ -66,12 +69,8 @@ public class SaiyouController {
 
 		System.out.println(rs.selectAllMybatis());
 
-		for(Map<String, Object> map :ls) {
-//			reserveDto.setName((String)map.get("NAME"));
-//			reserveDto.setRequestDate1((Date)map.get("REQUEST_DATE1"));
-//			reserveDto.setRequestDate2((Date)map.get("REQUEST_DATE2"));
-//			reserveDto.setDev((boolean)map.get("dev"));
-			reserveDto.setSchool((String)map.get("SCHOOL"));
+		for (Map<String, Object> map : ls) {
+			reserveDto.setSchool((String) map.get("SCHOOL"));
 		}
 
 		System.out.println(reserveDto.getSchool());

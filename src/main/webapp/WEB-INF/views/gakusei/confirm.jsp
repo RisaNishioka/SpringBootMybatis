@@ -36,7 +36,6 @@
 
 	<div align="center">
 	<input type="submit" value="この内容で登録する">
-		</a>
 	</div>
 
 	</form:form>
